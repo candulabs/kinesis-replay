@@ -20,11 +20,21 @@ const S3 = new AWS.S3();
 const kinesis = new AWS.Kinesis();
 
 async function getKeys(bucketName, prefix) {
-  const objects = await S3.listObjectsV2({
+  let loadMore = true;
+  let keys = [];
+  const params = {
     Bucket: bucketName,
     Prefix: prefix,
-  }).promise();
-  return objects.Contents.map((content) => content.Key);
+  };
+
+  while (loadMore) {
+    const objects = await S3.listObjectsV2(params).promise();
+    objects.Contents.forEach((content) => keys.push(content.Key));
+    loadMore = objects.IsTruncated;
+    params.ContinuationToken = objects.NextContinuationToken;
+  }
+
+  return keys;
 }
 
 async function readEvents(bucketName, key) {
@@ -56,6 +66,7 @@ function sendEvents(events, streamName) {
 }
 
 async function replay(bucketName, prefix, streamName, parallelRequests) {
+  console.log('fetching keys');
   const keys = await getKeys(bucketName, prefix);
   const batches = chunk(keys, parallelRequests);
   let batchNumber = 0;
