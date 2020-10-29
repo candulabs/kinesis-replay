@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "aws-sdk": "^2.781.0",
+    "commander": "^6.2.0",
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "prettier": "^2.1.2"
+  }
+}
