@@ -1,8 +1,10 @@
+#!/usr/bin/env node
+
 const { program } = require('commander');
 const zlib = require('zlib');
 const { promisify } = require('util');
 const AWS = require('aws-sdk');
-const { chunk } = require('lodash');
+const chunk = require('lodash/chunk');
 
 const gunzip = promisify(zlib.gunzip);
 

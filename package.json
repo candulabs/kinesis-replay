@@ -1,4 +1,7 @@
 {
+  "version": "1.0.0",
+  "name": "kinesis-replay",
+  "description": "Replay Amazon Kinesis events from S3",
   "dependencies": {
     "aws-sdk": "^2.781.0",
     "commander": "^6.2.0",
@@ -6,5 +9,10 @@
   },
   "devDependencies": {
     "prettier": "^2.1.2"
+  },
+  "main": "./replay.js",
+  "license": "MIT",
+  "bin": {
+    "kinesis-replay": "./replay.js"
   }
 }
