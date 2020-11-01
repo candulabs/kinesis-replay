@@ -14,5 +14,9 @@
   "license": "MIT",
   "bin": {
     "kinesis-replay": "./replay.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/candulabs/kinesis-replay.git"
   }
 }
